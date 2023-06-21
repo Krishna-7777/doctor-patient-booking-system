@@ -53,6 +53,11 @@ userRoutes.get('/slots', authenticate("user"), async (ask, give) => {
     try {
         let slots = await SlotsModel.aggregate([
             {
+                $match:{
+                available:true
+            }
+            },
+            {
               $addFields: {
                 doctorId: { $toObjectId: "$doctorId" }
               }
@@ -74,7 +79,6 @@ userRoutes.get('/slots', authenticate("user"), async (ask, give) => {
                 date: 1,
                 start: 1,
                 end: 1,
-                available: 1,
                 "doctor.speciality": 1
               }
             }
@@ -93,6 +97,47 @@ userRoutes.post('/bookslot/:id', authenticate("user"), async (ask, give) => {
     } catch (error) {
         console.log(error)
         give.send({msg:"Error in booking the Slot."})
+    }
+})
+
+userRoutes.get('/bookedSlots', authenticate("user"), async (ask, give) => {
+    try {
+        let slots = await SlotsModel.aggregate([
+            {
+                $match:{
+                userId:(jwt.decode(ask.headers.authorization)).id
+            }
+            },
+            {
+              $addFields: {
+                doctorId: { $toObjectId: "$doctorId" }
+              }
+            },
+            {
+              $lookup: {
+                from: "users",
+                localField: "doctorId",
+                foreignField: "_id",
+                as: "doctor"
+              }
+            },
+            {
+              $unwind: "$doctor"
+            },
+            {
+              $project: {
+                "doctor.name": 1,
+                date: 1,
+                start: 1,
+                end: 1,
+                "doctor.speciality": 1
+              }
+            }
+          ])
+        give.send(slots)
+    } catch (error) {
+        console.log(error)
+        give.send({msg:"Error in getting the Slots"})
     }
 })
 
