@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const { UserModel } = require("../models/user.model");
+const { SlotsModel } = require("../models/slots.model");
+const { authenticate } = require("../middleware/authenticator.middleware");
 
 const userRoutes = express.Router();
 
@@ -44,6 +46,42 @@ userRoutes.post('/login', async (ask, give) => {
         }
     } catch (error) {
         give.status(403).send({ msg: "Error in Login!" })
+    }
+})
+
+userRoutes.get('/slots', authenticate("user"), async (ask, give) => {
+    try {
+        let slots = await SlotsModel.aggregate([
+            {
+              $addFields: {
+                doctorId: { $toObjectId: "$doctorId" }
+              }
+            },
+            {
+              $lookup: {
+                from: "users",
+                localField: "doctorId",
+                foreignField: "_id",
+                as: "doctor"
+              }
+            },
+            {
+              $unwind: "$doctor"
+            },
+            {
+              $project: {
+                "doctor.name": 1,
+                date: 1,
+                start: 1,
+                end: 1,
+                available: 1,
+                "doctor.speciality": 1
+              }
+            }
+          ])
+        give.send(slots)
+    } catch (error) {
+        give.send({msg:"Error in getting the Slots"})
     }
 })
 
