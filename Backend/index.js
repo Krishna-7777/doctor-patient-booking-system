@@ -2,6 +2,8 @@ const express= require("express")
 const cors=require('cors');
 const { connect } = require("./config/db");
 const { userRoutes } = require("./routes/user.routes");
+const { doctorRoutes } = require("./routes/doctor.routes");
+const { authenticate } = require("./middleware/authenticator.middleware");
 
 const app=express()
 
@@ -14,6 +16,8 @@ app.get('/',(ask,give)=>{
 })
 
 app.use('/user', userRoutes)
+
+app.use('/doctor', authenticate('doctor'), doctorRoutes)
 
 app.listen(4000,()=>{
     try {
