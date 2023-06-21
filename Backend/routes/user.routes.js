@@ -85,6 +85,17 @@ userRoutes.get('/slots', authenticate("user"), async (ask, give) => {
     }
 })
 
+userRoutes.post('/bookslot/:id', authenticate("user"), async (ask, give) => {
+    let userId=(jwt.decode(ask.headers.authorization)).id
+    try {
+        await SlotsModel.findByIdAndUpdate(ask.params.id,{userId,available:false})
+        give.send({msg:"Your Slot has been Booked."})
+    } catch (error) {
+        console.log(error)
+        give.send({msg:"Error in booking the Slot."})
+    }
+})
+
 module.exports = {
     userRoutes
 }
