@@ -1,4 +1,5 @@
 const express = require("express");
+const jwt = require("jsonwebtoken")
 const { SlotsModel } = require("../models/slots.model");
 
 const doctorRoutes = express.Router();
@@ -19,6 +20,16 @@ doctorRoutes.delete('/slot/:id', async (ask, give) => {
         give.send({msg:"Slot has been Deleted."})
     } catch (error) {
         give.send({msg:"Error in Deleting the Slot."})
+    }
+})
+
+doctorRoutes.get('/slot', async (ask, give) => {
+    try {
+        let doctorId=(jwt.decode(ask.headers.authorization)).id
+        let slots = await SlotsModel.findAll({doctorId})
+        give.send(slots)
+    } catch (error) {
+        give.send({msg:"Error in getting the Slots"})
     }
 })
 
