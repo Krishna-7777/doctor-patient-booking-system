@@ -6,7 +6,10 @@ const doctorRoutes = express.Router();
 
 doctorRoutes.post('/slot', async (ask, give) => {
     try {
-        let slot = new SlotsModel(ask.body)
+        let payload=ask.body
+        let doctorId=(jwt.decode(ask.headers.authorization)).id
+        payload.doctorId=doctorId
+        let slot = new SlotsModel(payload)
         await slot.save()
         give.send({msg:"Availability Slot has been Created."})
     } catch (error) {
