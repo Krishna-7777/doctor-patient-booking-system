@@ -36,6 +36,47 @@ doctorRoutes.get('/slot', async (ask, give) => {
     }
 })
 
+doctorRoutes.get('/bookedSlots', async (ask, give) => {
+    try {
+        let slots = await SlotsModel.aggregate([
+            {
+                $match:{
+                doctorId:(jwt.decode(ask.headers.authorization)).id,
+                available:false
+            }
+            },
+            {
+              $addFields: {
+                userId: { $toObjectId: "$userId" }
+              }
+            },
+            {
+              $lookup: {
+                from: "users",
+                localField: "userId",
+                foreignField: "_id",
+                as: "user"
+              }
+            },
+            {
+              $unwind: "$user"
+            },
+            {
+              $project: {
+                "user.name": 1,
+                date: 1,
+                start: 1,
+                end: 1
+              }
+            }
+          ])
+        give.send(slots)
+    } catch (error) {
+        console.log(error)
+        give.send({msg:"Error in getting the Slots"})
+    }
+})
+
 module.exports={
     doctorRoutes
 }
