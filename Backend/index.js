@@ -1,6 +1,7 @@
 const express= require("express")
 const cors=require('cors');
 const { connect } = require("./config/db");
+const { userRoutes } = require("./routes/user.routes");
 
 const app=express()
 
@@ -11,6 +12,8 @@ app.use(express.json())
 app.get('/',(ask,give)=>{
     give.send("Doctor-Patient Appointment Booking System Backend")
 })
+
+app.use('/user', userRoutes)
 
 app.listen(4000,()=>{
     try {
