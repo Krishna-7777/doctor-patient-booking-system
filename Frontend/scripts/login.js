@@ -13,8 +13,10 @@ document.querySelector("form").addEventListener('submit',async(e)=>{
     })
     res=await res.json()
     alert(res.msg)
+    if(res.type!=undefined){
     localStorage.setItem("token",res.token)
     localStorage.setItem("type",res.type)
     localStorage.setItem("name",res.name)
     window.location=`../pages/${res.type}.html`
+    }
 })
