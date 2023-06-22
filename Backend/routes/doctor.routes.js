@@ -29,9 +29,10 @@ doctorRoutes.delete('/slot/:id', async (ask, give) => {
 doctorRoutes.get('/slot', async (ask, give) => {
     try {
         let doctorId=(jwt.decode(ask.headers.authorization)).id
-        let slots = await SlotsModel.findAll({doctorId})
+        let slots = await SlotsModel.find({doctorId})
         give.send(slots)
     } catch (error) {
+      console.log(error)
         give.send({msg:"Error in getting the Slots"})
     }
 })
