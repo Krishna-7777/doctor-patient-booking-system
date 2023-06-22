@@ -42,7 +42,7 @@ myslots.innerHTML=tableHTML
     bookedSlots=await bookedSlots.json()
     
     if(bookedSlots.length==0){
-        document.getElementById("booked-slots").innerHTML=`<h3>No Booked Slots Found. Your Slots have not been booked yet.</h3>`
+        document.getElementById("booked-slots").innerHTML="<h3>No Booked Slots Found. Your Slots have not been booked yet.</h3>";
     }else{
         var bookedSlotTableHTML = `
     <table>
@@ -65,7 +65,6 @@ myslots.innerHTML=tableHTML
             `).join('')}
         </tbody>
     </table>
-`;}
-document.getElementById("booked-slots").innerHTML=bookedSlotTableHTML
+`;
+document.getElementById("booked-slots").innerHTML=bookedSlotTableHTML}
 })()
-
