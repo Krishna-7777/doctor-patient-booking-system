@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPABS : Doctor's Portal</title>
+    <title>DPABS : Create Slots</title>
 </head>
 <body>
     <nav>
@@ -16,8 +16,19 @@
         </div>
     </nav>
     <hr>
-    <h1>Doctor's Portal</h1>
+    <div>
+        <form>
+            <label for="date">Date : </label>
+            <input type="date" name="date" id="date" required>
+            <label for="start">Start Time : </label>
+            <input type="time" name="start" id="start" required>
+            <label for="end">End Time : </label>
+            <input type="time" name="end" id="end" required>
+            <input type="submit" value="Create Slot">
+        </form>
+    </div>
 </body>
 <script src="../scripts/logout.js"></script>
 <script src="../scripts/name.js"></script>
+<script src="../scripts/create-slots.js"></script>
 </html>
