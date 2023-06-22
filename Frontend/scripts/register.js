@@ -45,7 +45,7 @@ document.querySelector("form").addEventListener("submit",async(e)=>{
     payload={name,email,password}
     payload.type="user"
     if(checkbox.checked){
-        payload.specialty=document.getElementById("specialty").value
+        payload.speciality=document.getElementById("specialty").value
     payload.type="doctor"
     }
     let res=await fetch("https://doctor-patient-booking-system.onrender.com/user/register",{
