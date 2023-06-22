@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPABS : Login</title>
+    <title>DPABS : Register</title>
 </head>
 <body>
     <nav>
@@ -16,11 +16,15 @@
     <hr>
     <div>
         <form>
+            <input type="text" id="name" placeholder="Name" minlength="3" required>
             <input type="email"  id="email" placeholder="Email" minlength="8" required>
             <input type="password"  id="password" placeholder="Password" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
-            <input type="submit" value="Login">
+            <span id="type-place"></span>
+            <input type="checkbox" id="isDoctor" name="isDoctor">
+            <label for="isDoctor">I am a Doctor</label>
+            <input type="submit" value="Register">
         </form>
     </div>
 </body>
-<script src="../scripts/login.js"></script>
+<script src="../scripts/register.js"></script>
 </html>
