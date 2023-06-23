@@ -1,0 +1,31 @@
+/* Table styles */
+.container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  thead th {
+    background-color: #f2f2f2;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+  }
+  
+  tbody td {
+    padding: 10px;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tbody tr:hover {
+    background-color: #eaf6ff;
+  }
+  

@@ -1,0 +1,44 @@
+body{
+    text-align: center;
+}
+
+nav {
+    background-color: #f2f2f2;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  nav div {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  nav a:hover {
+    color: #555;
+  }
+  
+  nav button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  nav button:hover {
+    background-color: #555;
+  }
+  
+  #Name {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
