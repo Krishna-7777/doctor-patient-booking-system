@@ -18,8 +18,14 @@ for (let i = 0; i < res.length; i++) {
         <td>${row.end}</td>
         <td>${row.doctor.name}</td>
         <td>${row.doctor.speciality}</td>
+        <td><button onclick="StartCall('${row._id}')">Join</button> </td>
       </tr>
     `;
 }
 document.querySelector("tbody").innerHTML=table
 }})()
+
+function StartCall(id){
+  localStorage.setItem("roomID",id)
+  window.location="./video-chat.html"
+}

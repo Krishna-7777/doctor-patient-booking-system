@@ -52,6 +52,7 @@ myslots.innerHTML=tableHTML
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Patient Name</th>
+                <th>Video Consultation</th>
             </tr>
         </thead>
         <tbody>
@@ -61,6 +62,7 @@ myslots.innerHTML=tableHTML
                     <td>${slot.start}</td>
                     <td>${slot.end}</td>
                     <td>${slot.user.name}</td>
+                    <td><button onclick="StartCall('${slot._id}')">Join</button> </td>
                 </tr>
             `).join('')}
         </tbody>
@@ -68,3 +70,8 @@ myslots.innerHTML=tableHTML
 `;
 document.getElementById("booked-slots").innerHTML=bookedSlotTableHTML}
 })()
+
+function StartCall(id){
+    localStorage.setItem("roomID",id)
+    window.location="./video-chat.html"
+  }
