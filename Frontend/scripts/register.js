@@ -1,5 +1,5 @@
 let checkbox=document.getElementById("isDoctor");
-
+let submitbtn=document.getElementById("submit")
 checkbox.addEventListener('change',()=>{
     if(checkbox.checked){
         document.getElementById("type-place").innerHTML=`<label for="specialties">Select Your Specialty:</label>
@@ -48,6 +48,13 @@ document.querySelector("form").addEventListener("submit",async(e)=>{
         payload.speciality=document.getElementById("specialty").value
     payload.type="doctor"
     }
+    submitbtn.value="Loading."
+    setTimeout(()=>{
+    submitbtn.value="Loading.."
+    },200)
+    setTimeout(()=>{
+    submitbtn.value="Loading..."
+    },400)
     let res=await fetch("https://doctor-patient-booking-system.onrender.com/user/register",{
         method:"POST",
         headers:{
